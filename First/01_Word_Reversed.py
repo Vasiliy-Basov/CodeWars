@@ -1,4 +1,5 @@
 # Если слово больше или равно 5 букв то делаем reverse букв если меньше оставляем неизменным.
+#
 def spin_words(sentence):
     words = sentence.split(" ")
     newSentence = []
