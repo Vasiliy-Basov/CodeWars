@@ -1,14 +1,23 @@
+#!/bin/python3
+# --------------------------------------------------------------------------
+# Program by Vasiliy.B.
+#
+# Version   Date           Info
+# 1.0       06.11.2022     Initial Version
+# --------------------------------------------------------------------------
+
 # Если слово больше или равно 5 букв то делаем reverse букв если меньше оставляем неизменным.
+
 def spin_words(sentence):
-    words = sentence.split(" ")
-    newSentence = []
+    words = sentence.split(" ")   # Разделяем наше предложение слова, разделитель пробел
+    newsentence = []              # Создаем пустой список
     for word in words:
         if len(word) >= 5:
-            rWorld = word[::-1] # Меняем местами буквы
+            rword = word[::-1]    # Меняем местами буквы -1 значит что шаг -1
         else:
-            rWorld = word
-        newSentence.append(rWorld)
-    return " ".join(newSentence)
+            rword = word
+        newsentence.append(rword) # Добавляем в наш список измененное или неизменное слово
+    return " ".join(newsentence)  # Делаем из списка строку с разделителем пробел
 
 print(spin_words("Geeks for Geeks"))
 
