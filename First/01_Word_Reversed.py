@@ -4,7 +4,7 @@ def spin_words(sentence):
     newSentence = []
     for word in words:
         if len(word) >= 5:
-            rWorld = word[::-1]
+            rWorld = word[::-1] # Меняем местами буквы
         else:
             rWorld = word
         newSentence.append(rWorld)
