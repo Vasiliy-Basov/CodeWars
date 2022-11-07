@@ -26,7 +26,7 @@ jobs:                         # jobs это как block в ansible, job ов м
           echo "Application name: ${{ env.APPLICATION_NAME }}"  # ${{ env.APPLICATION_NAME }} - вызов нашей глобальной переменной
           
       - name: Git clone my Repo
-        uses: action/checkout@v1  # Клонируем наш ркпозиторий внутрь VM
+        uses: action/checkout@master  # Клонируем наш ркпозиторий внутрь VM
         
       - name: list current folder # просмотр что у нас в каталоге на этой VM
         run: ls -la
