@@ -24,8 +24,14 @@ jobs:                         # jobs это как block в ansible, job ов м
           echo "Hello Message1"
           echo "Hello Message2"
           echo "Application name: ${{ env.APPLICATION_NAME }}"  # ${{ env.APPLICATION_NAME }} - вызов нашей глобальной переменной
-      - name: list current folder
+          
+      - name: Git clone my Repo
+        uses: action/checkout@v1  # Клонируем наш ркпозиторий внутрь VM
+        
+      - name: list current folder # просмотр что у нас в каталоге на этой VM
         run: ls -la
+        
+
         
   my_deploy:
     runs-on: ubuntu-latest
@@ -35,3 +41,8 @@ jobs:                         # jobs это как block в ansible, job ов м
          run: echo "Hello World from Deploy job"
        - name: Printing Deployment package
          run: echo "Deploy package name is ${{ env.DEPLOY_PACKAGE_NAME }}"
+       - name: Lets test some packages iof the are here 1
+         run: aws --version                               # Смотрим есть ли такая команда в VM
+       - name: Lets test some packages iof the are here 2
+         run: zip                                         # Проверяем есть ли команда zip в VM
+         
