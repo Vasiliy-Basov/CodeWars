@@ -1,0 +1,25 @@
+# --------------------------------------------------------------------------
+# Git Hub Actions
+#
+# Vasiliy Basov
+# --------------------------------------------------------------------------
+name: My-GitHubActions-Basics # Recommendation: Without spaces
+
+
+on:                         # Когда мы хоти чтобы скрипт запускался ctrl + space дает выбрать варианты
+  push:                     # Несколько значений прописываются через запятую
+    branches:               # Например на pull_reqest можно запускать проверку синтаксиса кода
+      - master              # В этом примере Actions будет происходить в случае push на master branch
+      
+jobs:                       # jobs это как block в ansible, job ов может быть много, каждый job запускается на отдельной VM
+  my_testing:               # Имя нашего Job-а
+    runs-on: ubuntu-latest  # По сути это докер, мы выбираем на какой системе будет запускаться наш job
+    steps:                  # Это аналог tasks в ansible
+      - name: Print Hello Message
+        run: echo "Hello World from Testing job"  # Здесь пишем команду линукса 
+  
+  my_deploy:
+    runs-on: ubuntu-latest
+    steps:
+       - name: Print Hello Message
+         run: echo "Hello World from Deploy job" 
