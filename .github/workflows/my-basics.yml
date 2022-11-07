@@ -36,13 +36,25 @@ jobs:                         # jobs это как block в ansible, job ов м
   my_deploy:
     runs-on: ubuntu-latest
     needs: [my_testing]     # Означает что этот job запустится после my_testing job-а
+    env:
+      VAR1: "This is Job Level Variable1" # это локальные переменные только для job-а
+      VAR2: "This is Job Level Variable2"
+    
     steps:
        - name: Print Hello Message in Deploy
          run: echo "Hello World from Deploy job"
+       - name: Print enc vars
+         run: |
+           echo "Var1 = ${{ env.VAR1 }}"
+           echo "Var2 = ${{ env.VAR2 }}"
+           echo "Var3 = $LOCAL_VAR" # Локальные переменные можно прописывать без скобок
+         env:
+           LOCAL_VAR: "This is Super local Enviroment variables"  # Локальная переменная для step
+           
        - name: Printing Deployment package
          run: echo "Deploy package name is ${{ env.DEPLOY_PACKAGE_NAME }}"
        - name: Lets test some packages iof the are here 1
          run: aws --version                               # Смотрим есть ли такая команда в VM
        - name: Lets test some packages iof the are here 2
-         run: zip                                         # Проверяем есть ли команда zip в VM
+         run: zip --version                                        # Проверяем есть ли команда zip в VM
          
