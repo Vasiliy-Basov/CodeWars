@@ -15,7 +15,7 @@ on:                           # Когда мы хоти чтобы скрипт
       
 jobs:                         # jobs это как block в ansible, job ов может быть много, каждый job запускается на отдельной VM
   my_testing:                 # Имя нашего Job-а
-    runs-on: ubuntu-latest    # По сути это докер, мы выбираем на какой системе будет запускаться наш job
+    runs-on: ubuntu-latestяч    # По сути это докер, мы выбираем на какой системе будет запускаться наш job
     steps:                    # Это аналог tasks в ansible
       - name: Print Hello Message шт Testing
         run: echo "Hello World from Testing job"  # Здесь пишем команду линукса 
