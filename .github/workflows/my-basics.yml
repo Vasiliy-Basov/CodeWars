@@ -15,11 +15,12 @@ jobs:                       # jobs это как block в ansible, job ов мо
   my_testing:               # Имя нашего Job-а
     runs-on: ubuntu-latest  # По сути это докер, мы выбираем на какой системе будет запускаться наш job
     steps:                  # Это аналог tasks в ansible
-      - name: Print Hello Message
+      - name: Print Hello Message шт Testing
         run: echo "Hello World from Testing job"  # Здесь пишем команду линукса 
   
   my_deploy:
     runs-on: ubuntu-latest
+    needs: [my_testing]     # Означает что этот job запустится после my_testing job-а
     steps:
-       - name: Print Hello Message
+       - name: Print Hello Message in Deploy
          run: echo "Hello World from Deploy job" 
