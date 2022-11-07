@@ -4,23 +4,32 @@
 # Vasiliy Basov
 # --------------------------------------------------------------------------
 name: My-GitHubActions-Basics # Recommendation: Without spaces
+env:                          # Здесь прописываем наши глобальные переменные которые видны во всех jobs
+  APPLICATION_NAME       : "MyFlask"
+  DEPLOY_PACKAGE_NAME    : "flask-deploy-ver-${{ github.sha }}" # github.sha - это встроенная в github переменная которая равна hash-у коммита (уникальный номер коммита)  
 
-
-on:                         # Когда мы хоти чтобы скрипт запускался ctrl + space дает выбрать варианты
-  push:                     # Несколько значений прописываются через запятую
-    branches:               # Например на pull_reqest можно запускать проверку синтаксиса кода
-      - master              # В этом примере Actions будет происходить в случае push на master branch
+on:                           # Когда мы хоти чтобы скрипт запускался ctrl + space дает выбрать варианты
+  push:                       # Несколько значений прописываются через запятую
+    branches:                 # Например на pull_reqest можно запускать проверку синтаксиса кода
+      - master                # В этом примере Actions будет происходить в случае push на master branch
       
-jobs:                       # jobs это как block в ansible, job ов может быть много, каждый job запускается на отдельной VM
-  my_testing:               # Имя нашего Job-а
-    runs-on: ubuntu-latest  # По сути это докер, мы выбираем на какой системе будет запускаться наш job
-    steps:                  # Это аналог tasks в ansible
+jobs:                         # jobs это как block в ansible, job ов может быть много, каждый job запускается на отдельной VM
+  my_testing:                 # Имя нашего Job-а
+    runs-on: ubuntu-latest    # По сути это докер, мы выбираем на какой системе будет запускаться наш job
+    steps:                    # Это аналог tasks в ansible
       - name: Print Hello Message шт Testing
         run: echo "Hello World from Testing job"  # Здесь пишем команду линукса 
+      - name: Execute few commands
+        run: |
+          echo "Hello Message1"
+          echo "Hello Message2"
+          echo "Application name: ${{ env.APPLICATION_NAME }}"  # ${{ env.APPLICATION_NAME }} - вызов нашей глобальной переменной
   
   my_deploy:
     runs-on: ubuntu-latest
     needs: [my_testing]     # Означает что этот job запустится после my_testing job-а
     steps:
        - name: Print Hello Message in Deploy
-         run: echo "Hello World from Deploy job" 
+         run: echo "Hello World from Deploy job"
+       - name: Printing Deployment package
+         run: echo "Deploy package name is ${{ env.DEPLOY_PACKAGE_NAME }}"
